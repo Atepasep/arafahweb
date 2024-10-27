@@ -18,9 +18,6 @@
                 <div class="mb-2">
                     <label class="form-label">
                     Password
-                    <span class="form-label-description">
-                        <a href="./forgot-password.html">I forgot password</a>
-                    </span>
                     </label>
                     <div class="input-group input-group-flat">
                     <input type="password" class="form-control" id="password" name="password"  placeholder="Your password"  autocomplete="off">
@@ -31,11 +28,14 @@
                     </span>
                     </div>
                 </div>
-                <div class="mb-2">
+                <div class="mb-2 d-flex justify-content-between">
                     <label class="form-check">
                     <input type="checkbox" class="form-check-input"/>
-                    <span class="form-check-label">Remember me on this device</span>
+                    <span class="form-check-label">Remember me</span>
                     </label>
+                    <span class="form-label-description">
+                        <a href="./forgot-password.html">I forgot password</a>
+                    </span>
                 </div>
                 <div class="form-footer">
                     <button type="submit" class="btn btn-primary w-100">Sign in</button>

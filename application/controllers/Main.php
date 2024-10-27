@@ -16,7 +16,7 @@ class Main extends CI_Controller
     public function index()
     {
         $this->load->view('layouts/header');
-        $this->load->view('main');
+        $this->load->view('main/main');
         $footer['fungsi'] = 'main';
         $this->load->view('layouts/footer', $footer);
     }
