@@ -52,39 +52,43 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
         // $user = $this->db->get_where('user', ['username' => $username])->row_array();
         $user = $this->userappsmodel->getdatabyuser($username)->row_array();
-        if ($user) {
-            if (encrypto($password) == $user['password'] && $user['aktif'] == 1) {
-                $user_data = [
-                    'id' => $user['id'],
-                    'name' => $user['name'],
-                    'username' => $user['username'],
-                    'jabatan' => $user['jabatan'],
-                    'master' => $user['master'],
-                    'manajemen' => $user['manajemen'],
-                    'transaksi' => $user['transaksi'],
-                    'other' => $user['other'],
-                    'hakdepartemen' => $user['hakdepartemen'],
-                    'level_user' => $user['idlevel'],
-                    'dept_user' => $user['id_dept'],
-                    'ttd' => $user['ttd'],
-                    'getinifn' => true
-                ];
-                $this->session->set_userdata($user_data);
+        if(isset($username) && isset($password)){
+            if ($user) {
+                if ($password == $user['password'] && $user['aktif'] == 1) {
+                    $user_data = [
+                        'getinarafah' => true,
+                        // 'id' => $user['id'],
+                        // 'name' => $user['name'],
+                        // 'username' => $user['username'],
+                        // 'jabatan' => $user['jabatan'],
+                        // 'master' => $user['master'],
+                        // 'manajemen' => $user['manajemen'],
+                        // 'transaksi' => $user['transaksi'],
+                        // 'other' => $user['other'],
+                        // 'hakdepartemen' => $user['hakdepartemen'],
+                        // 'level_user' => $user['idlevel'],
+                        // 'dept_user' => $user['id_dept'],
+                        // 'ttd' => $user['ttd'],
+                        // 'getinifn' => true
+                    ];
+                    $this->session->set_userdata($user_data);
 
-                $this->session->set_userdata('arrdep',arrdep($user['hakdepartemen']));
-                $this->session->set_userdata('hak_ttd_pb',arrdep($user['cekpb']));
-                $this->session->set_userdata('bl',date('m'));
-                $this->session->set_userdata('th',date('Y'));
+                    $this->session->set_userdata('bl',date('m'));
+                    $this->session->set_userdata('th',date('Y'));
 
-                $url = base_url('Main');
-                redirect($url);
+                    $url = base_url('Main');
+                    redirect($url);
+                } else {
+                    $this->session->set_flashdata('message', $htmlsalahpassword);
+                    $url = base_url('Auth');
+                    redirect($url);
+                }
             } else {
-                $this->session->set_flashdata('message', $htmlsalahpassword);
+                $this->session->set_flashdata('message', $htmltidakditemukan);
                 $url = base_url('Auth');
                 redirect($url);
             }
-        } else {
-            $this->session->set_flashdata('message', $htmltidakditemukan);
+        }else{
             $url = base_url('Auth');
             redirect($url);
         }
