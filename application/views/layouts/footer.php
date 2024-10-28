@@ -27,8 +27,25 @@
         </footer>
       </div>
     </div>
+    <!-- jquery latest version -->
+    <script src="<?= base_url(); ?>assets/js/vendor/jquery.min.js"></script>
+    <script src="<?= base_url(); ?>assets/libs/list.js/dist/list.min.js?1692870487" defer></script>
     <script src="<?= base_url(); ?>assets/js/demo-theme.min.js?1692870487"></script>
     <script src="<?= base_url(); ?>assets/js/tabler.min.js?1692870487" defer></script>
     <script src="<?= base_url(); ?>assets/js/demo.min.js?1692870487" defer></script>
+    <script src="<?= base_url(); ?>assets/js/myscript.js?1692870487" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const list = new List('table-default', {
+      	sortClass: 'table-sort',
+      	listClass: 'table-tbody',
+      	valueNames: [ 'sort-name', 'sort-type', 'sort-city', 'sort-score',
+      		{ attr: 'data-date', name: 'sort-date' },
+      		{ attr: 'data-progress', name: 'sort-progress' },
+      		'sort-quantity'
+      	]
+      });
+      })
+    </script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Main extends CI_Controller
+class Userapps extends CI_Controller
 {
     function __construct()
     {
@@ -15,10 +15,14 @@ class Main extends CI_Controller
     }
     public function index()
     {
-        $header['posisi'] = 'home';
+        $header['posisi'] = 'master';
+        $data['data'] = $this->usermodel->getdata();
         $this->load->view('layouts/header',$header);
-        $this->load->view('main/main');
-        $footer['fungsi'] = 'main';
+        $this->load->view('user/user',$data);
+        $footer['fungsi'] = 'user';
         $this->load->view('layouts/footer', $footer);
+    }
+    public function adduser(){
+        $this->load->view('user/adduser');
     }
 }
