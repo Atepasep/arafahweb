@@ -7,11 +7,13 @@
     <title>Arafah Medilab</title>
     <link href="<?= base_url(); ?>assets/favicon.ico" rel="icon">
     <!-- CSS files -->
+    <link href=<?= base_url() . "assets/css/bootstrap.min.css" ?> rel="stylesheet">
     <link href="<?= base_url(); ?>assets/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="<?= base_url() ?>assets/css/font-awesome.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/mystyle.css?1692870487" rel="stylesheet"/>
     <style>
       /* @import url('https://rsms.me/inter/inter.css');
@@ -24,6 +26,23 @@
     </style>
   </head>
   <body class="layout-fluid">
+    <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-blue">
+            <h5 class="modal-title" style="color: white;">Large modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body fetched-data">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
     <div class="page">
       <!-- Navbar -->
       <header class="navbar navbar-expand-md d-print-none" >
@@ -153,12 +172,21 @@
           </div>
         </div>
       </header>
+      <?php 
+      $home = 'active';
+      $master = '';
+      $transaksi = '';
+      if($posisi=='master'){
+        $home = '';
+        $master = 'active';
+      }
+       ?>
       <header class="navbar-expand-md">
         <div class="collapse navbar-collapse" id="navbar-menu">
           <div class="navbar">
             <div class="container-xl">
               <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item <?= $home; ?>">
                   <a class="nav-link" href="./" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
@@ -168,7 +196,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown <?= $master; ?>">
                   <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" /></svg>
@@ -193,7 +221,7 @@
                         <a class="dropdown-item py-1" href="./badges.html">
                           Karyawan/Personil
                         </a>
-                        <a class="dropdown-item py-1" href="./buttons.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'userapps'; ?>">
                           User Aplikasi
                         </a>
                       </div>

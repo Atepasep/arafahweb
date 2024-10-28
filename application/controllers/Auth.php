@@ -57,7 +57,7 @@ class Auth extends CI_Controller
                 if ($password == $user['password'] && $user['aktif'] == 1) {
                     $user_data = [
                         'getinarafah' => true,
-                        // 'id' => $user['id'],
+                        'userid' => $user['id'],
                         // 'name' => $user['name'],
                         // 'username' => $user['username'],
                         // 'jabatan' => $user['jabatan'],
