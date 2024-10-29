@@ -23,6 +23,34 @@ class Userapps extends CI_Controller
         $this->load->view('layouts/footer', $footer);
     }
     public function adduser(){
-        $this->load->view('user/adduser');
+        $data['kode'] = time();
+        $data['action'] = base_url().'userapps/simpanuser';
+        $this->load->view('user/adduser',$data);
+    }
+    public function edituser($id){
+        $data['data'] = $this->usermodel->getdatabyid($id)->row_array();
+        $data['action'] = base_url().'userapps/updateuser';
+        $this->load->view('user/edituser',$data);
+    }
+    public function simpanuser(){
+        $hasil = $this->usermodel->simpanuser();
+        if($hasil){
+            $url = base_url().'userapps';
+            redirect($url);
+        }
+    }
+    public function hapususer($id){
+        $hasil = $this->usermodel->hapusdata($id);
+        if($hasil){
+            $url = base_url().'userapps';
+            redirect($url);
+        }
+    }
+    public function updateuser(){
+        $hasil = $this->usermodel->updateuser();
+        if($hasil){
+            $url = base_url().'userapps';
+            redirect($url);
+        }
     }
 }

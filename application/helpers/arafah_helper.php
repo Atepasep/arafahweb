@@ -10,11 +10,14 @@ function datauser($kode, $kolom)
 function visibpass($kata)
 {
     $hasil = '•';
-    $jumlah = strlen($kata)*2;
-    // if (strlen($kata) <= 5) {
-    //     $hasil = str_repeat('*', strlen($kata) - 1) . substr($kata, strlen($kata) - 1, 1);
-    // } else {
-    //     $hasil = substr($kata, 0, 1) . str_repeat('*', strlen($kata) - 3) . substr($kata, strlen($kata) - 2, 2);
-    // }
+    $jumlah = strlen($kata) >= 6 ? strlen($kata) : strlen($kata)*2;
     return str_repeat($hasil,$jumlah);
+}
+function cekmodul($kode,$ke){
+    $string = '';
+    $hasil = substr($kode,$ke*2-2,2);
+    if($hasil=='10'){
+        $string = 'checked';
+    }
+    return $string;
 }

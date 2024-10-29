@@ -11,8 +11,9 @@
             </div>
             <div class="col">
                 <label class="form-label">Kode</label>
-                <input type="text" class="form-control font-kecil" placeholder="Kode" value="<?= $kode; ?>" disabled />
-                <input type="text" class="form-control font-kecil hilang" name="kode" id="kode" value="<?= $kode; ?>" />
+                <input type="text" class="form-control font-kecil" placeholder="Kode" value="<?= $data['kode']; ?>" disabled />
+                <input type="text" class="form-control font-kecil hilang" name="kode" id="kode" value="<?= $data['kode']; ?>" />
+                <input type="text" class="form-control font-kecil hilang" name="id" id="id" value="<?= $data['id']; ?>" />
             </div>
         </div>
         <div class="row mb-1 align-items-end">
@@ -20,7 +21,7 @@
             </div>
             <div class="col">
                 <label class="form-label mb-0 font-kecil required">Nama</label>
-                <input type="text" class="form-control font-kecil" id="nama" name="nama" placeholder="Isi Nama Lengkap" />
+                <input type="text" class="form-control font-kecil" id="nama" name="nama" value="<?= $data['nama']; ?>" placeholder="Isi Nama Lengkap" />
             </div>
         </div>
         <div class="row mb-1 align-items-end">
@@ -28,7 +29,7 @@
             </div>
             <div class="col">
                 <label class="form-label mb-0 font-kecil required">Jabatan</label>
-                <input type="text" class="form-control font-kecil" id="posisi" name="posisi" placeholder="Jabatan Pekerjaan" />
+                <input type="text" class="form-control font-kecil" id="posisi" name="posisi" value="<?= $data['posisi']; ?>" placeholder="Jabatan Pekerjaan" />
             </div>
         </div>
         <div class="row mb-1 align-items-end">
@@ -38,9 +39,9 @@
                 <label class="form-label mb-0 font-kecil required">Tipe User</label>
                 <select class="form-control form-select font-kecil" id="hak" name="hak">
                     <option value="0">Pilih Tipe User</option>
-                    <option value="1">Administrator</option>
-                    <option value="2">Owner</option>
-                    <option value="3">User</option>
+                    <option value="1" <?php if($data['hak']==1){ echo "selected"; } ?>>Administrator</option>
+                    <option value="2" <?php if($data['hak']==2){ echo "selected"; } ?>>Owner</option>
+                    <option value="3" <?php if($data['hak']==3){ echo "selected"; } ?>>User</option>
                 </select>
             </div>
         </div>
@@ -49,7 +50,7 @@
             </div>
             <div class="col">
                 <label class="form-label mb-0 font-kecil required">Username</label>
-                <input type="text" class="form-control font-kecil" id="username" name="username" placeholder="Username" />
+                <input type="text" class="form-control font-kecil" id="username" name="username" value="<?= $data['username']; ?>" placeholder="Username" />
             </div>
         </div>
         <div class="row mb-3 align-items-end">
@@ -57,7 +58,7 @@
             </div>
             <div class="col">
                 <label class="form-label mb-1 font-kecil required">Password</label>
-                <input type="password" class="form-control font-kecil" id="password" name="password" placeholder="Password" />
+                <input type="password" class="form-control font-kecil" id="password" name="password" value="<?= $data['password']; ?>" placeholder="Password" />
             </div>
         </div>
         <div class="row mb-1 align-items-end">
@@ -65,7 +66,7 @@
             </div>
             <div class="col">
                 <label class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="aktif" name="aktif">
+                    <input class="form-check-input" type="checkbox" id="aktif" name="aktif" <?php if($data['aktif']==1){ echo "checked"; } ?>>
                     <span class="form-check-label">Aktif</span>
                 </label>
             </div>
@@ -74,83 +75,83 @@
             <div class="row">
                 <div class="col-4">
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek1" name="cek1" >
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek1" name="cek1" <?= cekmodul($data['modul'],1); ?>>
                         <span class="form-check-label font-kecil">User Aplikasi</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek2" name="cek2">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek2" name="cek2" <?= cekmodul($data['modul'],2); ?>>
                         <span class="form-check-label font-kecil">Master Karyawan</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek3" name="cek3">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek3" name="cek3" <?= cekmodul($data['modul'],3); ?>>
                         <span class="form-check-label font-kecil">Master Barang</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek4" name="cek4">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek4" name="cek4" <?= cekmodul($data['modul'],4); ?>>
                         <span class="form-check-label font-kecil">Master Customer</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek5" name="cek5">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek5" name="cek5" <?= cekmodul($data['modul'],5); ?>>
                         <span class="form-check-label font-kecil">Master Supplier</span>
                     </label>
                 </div>
                 <div class="col-4">
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek6" name="cek6">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek6" name="cek6" <?= cekmodul($data['modul'],6); ?>>
                         <span class="form-check-label font-kecil">Penjualan</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek7" name="cek7">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek7" name="cek7" <?= cekmodul($data['modul'],7); ?>>
                         <span class="form-check-label font-kecil">Pembelian</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek8" name="cek8">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek8" name="cek8" <?= cekmodul($data['modul'],8); ?>>
                         <span class="form-check-label font-kecil">Retur Penjualan</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek9" name="cek9">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek9" name="cek9" <?= cekmodul($data['modul'],9); ?>>
                         <span class="form-check-label font-kecil">Retur Pembelian</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek10" name="cek10">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek10" name="cek10" <?= cekmodul($data['modul'],10); ?>>
                         <span class="form-check-label font-kecil">Cicilan Jual Kredit</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek11" name="cek11">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek11" name="cek11" <?= cekmodul($data['modul'],11); ?>>
                         <span class="form-check-label font-kecil">Cicilan Beli Kredit</span>
                     </label>
                 </div>
                 <div class="col-4">
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek12" name="cek12">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek12" name="cek12" <?= cekmodul($data['modul'],12); ?>>
                         <span class="form-check-label font-kecil">Rekap Stok</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek13" name="cek13">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek13" name="cek13" <?= cekmodul($data['modul'],13); ?>>
                         <span class="form-check-label font-kecil">Cash Flow</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek14" name="cek14">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek14" name="cek14" <?= cekmodul($data['modul'],14); ?>>
                         <span class="form-check-label font-kecil">Laporan</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek15" name="cek15">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek15" name="cek15" <?= cekmodul($data['modul'],15); ?>>
                         <span class="form-check-label font-kecil">Backup Database</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek16" name="cek16">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek16" name="cek16" <?= cekmodul($data['modul'],16); ?>>
                         <span class="form-check-label font-kecil">Adjustment Barang</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek17" name="cek17">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek17" name="cek17" <?= cekmodul($data['modul'],17); ?>>
                         <span class="form-check-label font-kecil">Penerimaan Barang</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek18" name="cek18">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek18" name="cek18" <?= cekmodul($data['modul'],18); ?>>
                         <span class="form-check-label font-kecil">Pengeluaran Barang</span>
                     </label>
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="cek19" name="cek19">
+                        <input class="form-check-input font-kecil" type="checkbox" id="cek19" name="cek19" <?= cekmodul($data['modul'],19); ?>>
                         <span class="form-check-label font-kecil">History</span>
                     </label>                
                 </div>
