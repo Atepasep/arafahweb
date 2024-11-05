@@ -12,6 +12,12 @@ class Userapps extends CI_Controller
         }
         // $this->load->model('personilmodel');
         $this->load->model('user_model','usermodel');
+        if(cekmodul(datauser($this->session->userdata('userid'),'modul'),1)!='checked'){
+            $this->session->set_flashdata('pesanerror',1);
+            $this->session->set_flashdata('msg','Anda tidak berhak ke modul USER APLIKASI, Hubungi Administrator !');
+            $url = base_url('Main');
+            redirect($url);
+        }
     }
     public function index()
     {

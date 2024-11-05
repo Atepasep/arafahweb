@@ -6,14 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Arafah Medilab</title>
     <link href="<?= base_url(); ?>assets/favicon.ico" rel="icon">
+    <!-- datatables -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/datatables.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/fixheader/css/fixedHeader.bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/fixedColumns.dataTables.min.css">
     <!-- CSS files -->
     <link href=<?= base_url() . "assets/css/bootstrap.min.css" ?> rel="stylesheet">
     <link href="<?= base_url(); ?>assets/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
+    <link href="<?= base_url(); ?>assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Template source -->
     <link href="<?= base_url() ?>assets/css/demo.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/font-awesome.min.css?1692870487" rel="stylesheet"/>
+    <link href="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.css" rel="stylesheet">
+
     <link href="<?= base_url() ?>assets/css/mystyle.css?1692870487" rel="stylesheet"/>
     <style>
       /* @import url('https://rsms.me/inter/inter.css');
@@ -25,6 +34,7 @@
       } */
     </style>
   </head>
+  <!-- Modal -->
   <body class="layout-fluid">
     <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -34,7 +44,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body fetched-data">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.
+            <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde. -->
+            <div class="container container-slim py-4">
+              <div class="text-center">
+                <div class="text-secondary mb-3">Fetching data, Please Wait ..</div>
+                <div class="progress progress-sm">
+                  <div class="progress-bar progress-bar-indeterminate"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- <div class="modal-footer">
             <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -69,6 +87,56 @@
         </div>
       </div>
     </div>
+    <div class="modal modal-blur fade" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-full-width modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-blue">
+            <h5 class="modal-title text-white">Full width modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body fetched-data">
+            <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde. -->
+            <div class="container container-slim py-4" style="width: 50%">
+              <div class="text-center">
+                <div class="text-secondary mb-3">Fetching data, Please wait ..</div>
+                <div class="progress progress-sm">
+                  <div class="progress-bar progress-bar-indeterminate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-scrollable" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-blue">
+            <h5 class="modal-title text-white">Scrollable modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body fetched-data">
+            <div class="container container-slim py-4">
+              <div class="text-center">
+                <div class="text-secondary mb-3">Fetching data, Please wait ..</div>
+                <div class="progress progress-sm">
+                  <div class="progress-bar progress-bar-indeterminate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="simpanformscroll">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal  -->
     <div class="page">
       <!-- Navbar -->
       <header class="navbar navbar-expand-md d-print-none" >
@@ -180,10 +248,18 @@
             </div>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                <?php 
+                  $foto = base_url().'assets/images/logoasliw.png';
+                  if(datauser($this->session->userdata('userid'),'filefoto')!=''){
+                    if(file_exists(FCPATH .'assets/images/user_avatar/'.datauser($this->session->userdata('userid'),'filefoto'))){
+                      $foto = base_url().'assets/images/user_avatar/'.datauser($this->session->userdata('userid'),'filefoto');
+                    }
+                  }
+                ?>
+                <span class="avatar avatar-sm" style="background-image: url(<?= $foto; ?>)"></span>
                 <div class="d-none d-xl-block ps-2">
-                  <div>Administrator</div>
-                  <div class="mt-1 small text-secondary">Programmer</div>
+                  <div><?= datauser($this->session->userdata('userid'),'nama'); ?></div>
+                  <div class="mt-1 small text-secondary"><?= datauser($this->session->userdata('userid'),'posisi'); ?></div>
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -244,7 +320,7 @@
                           Customer
                         </a>
                         <hr class="m-0">
-                        <a class="dropdown-item py-1" href="./badges.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'personil'; ?>">
                           Karyawan/Personil
                         </a>
                         <a class="dropdown-item py-1" href="<?= base_url().'userapps'; ?>">

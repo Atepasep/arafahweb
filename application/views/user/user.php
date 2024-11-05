@@ -5,6 +5,19 @@
                 <div class="col">
                 <h2 class="page-title d-flex justify-content-between">
                     <span>Data User Aplikasi</span>
+                    <?php if($this->session->userdata('msg')!=null): ?>
+                        <div class="alert alert-important alert-danger alert-dismissible font-kecil" role="alert">
+                            <div class="d-flex">
+                            <div>
+                                <svg class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 8v4" /><path d="M12 16h.01" /></svg>
+                            </div>
+                            <div>
+                                <?= $this->session->userdata('msg'); ?>
+                            </div>
+                            </div>
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                        </div>
+                    <?php endif; ?>
                     <a href="<?= base_url().'userapps/adduser'; ?>" class="btn btn-blue btn-square font-kecil btn-ku" data-bs-toggle="modal" data-bs-target="#modal-large" data-title="Add User Aplikasi"><i class="fa fa-plus mr-1"></i> Tambah data</a>
                 </h2>
                 </div>
@@ -34,11 +47,18 @@
                                             <tr>
                                                 <td class="sort-name">
                                                 <div class="row align-items-center">
-                                                    <div class="col-12 col-lg-auto"><span class="avatar m-0" style="background-image: url(<?= base_url().'assets/images/logoasliw.png'; ?>)"></span></div>
+                                                    <?php 
+                                                        if ($user['filefoto']==''){
+                                                            $foto = base_url().'assets/images/logoasliw.png';
+                                                        }else{
+                                                            $foto = base_url().'assets/images/user_avatar/'.$user['filefoto'];
+                                                        }
+                                                     ?>
+                                                    <div class="col-12 col-lg-auto"><span class="avatar m-0" style="background-image: url(<?= $foto ?>)"></span></div>
                                                     <div class="col">
-                                                    <div>
-                                                        <?= $user['nama']; ?>
-                                                    </div>
+                                                        <div class="font-bold">
+                                                            <?= $user['nama']; ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 </td>

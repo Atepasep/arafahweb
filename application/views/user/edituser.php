@@ -1,13 +1,25 @@
 <div class="container-xl">
-    <form method="POST" name="formuser" id="formuser" action="<?= $action; ?>" >
+    <form method="POST" name="formuser" id="formuser" action="<?= $action; ?>"  enctype="multipart/form-data" >
         <div class="row mb-1 align-items-end">
             <div class="col-auto">
-                <a href="#" class="avatar avatar-upload rounded">
+                <a href="#" class="avatar avatar-upload rounded" title="Klik untuk ganti FOTO" id="file_browser">
                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                     <span class="avatar-upload-text">Add</span> -->
-                    <img src="<?= base_url().'assets/images/addgambar.png'; ?>" alt="gambar">
+                    <?php 
+                        if($data['filefoto']==''){
+                            $foto = base_url().'assets/images/addgambar.png';
+                        }else{
+                            $foto = base_url().'assets/images/user_avatar/'.$data['filefoto'];
+                        }
+                    ?>
+                    <img src="<?= $foto?>" alt="gambar" id="gbimage">
                 </a>
+                <div class="input-group">
+                    <input type="hidden" class="form-control group-control" id="file_path" name="file_path">
+                    <input type="file" class="hilang" accept="image/*"  id="file" name="file" onchange="loadFile(event)">
+                    <input type="hidden" name="old_logo" value="<?= $data['filefoto']; ?>">
+                </div>
             </div>
             <div class="col">
                 <label class="form-label">Kode</label>
@@ -189,4 +201,14 @@
         }
         document.formuser.submit();
     });
+    $("#file_browser").click(function (e) {
+		e.preventDefault();
+		$("#file").click();
+	});
+	$("#file_path").click(function () {
+		$("#file_browser").click();
+	});
+	$("#file").change(function () {
+		$("#file_path").val($(this).val());
+	});
 </script>

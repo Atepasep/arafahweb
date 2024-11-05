@@ -21,6 +21,22 @@ class User_model extends CI_Model
             }
             unset($data['cek'.$x]);
         }
+        // $fotodulu = FCPATH . 'assets/images/user_avatar/' . $data['old_logo']; //base_url().$gambar.'.png';
+		$data['filefoto'] = $this->uploadFoto();
+		if ($data['filefoto'] != NULL) {
+			if ($data['filefoto'] == 'kosong') {
+				$data['filefoto'] = NULL;
+			}
+			// if (file_exists($fotodulu)) {
+			// 	unlink($fotodulu);
+			// }
+			unset($data['logo']);
+			unset($data['file_path']);
+			unset($data['old_logo']);
+		} else {
+			// $this->session->set_flashdata('msg', 'Error Upload Foto Profile ' . $temp['noinduk'] . ' ');
+            unset($data['filefoto']);
+		}
         $data['modul'] = $modul;
         return $this->db->insert('user',$data);
     }
@@ -35,6 +51,24 @@ class User_model extends CI_Model
             }
             unset($data['cek'.$x]);
         }
+        if($data['file_path']!=''){
+            $fotodulu = FCPATH . 'assets/images/user_avatar/' . $data['old_logo']; //base_url().$gambar.'.png';
+            $data['filefoto'] = $this->uploadFoto();
+            if ($data['filefoto'] != NULL) {
+                if ($data['filefoto'] == 'kosong') {
+                    $data['filefoto'] = '';
+                }
+                if (file_exists($fotodulu)) {
+                    unlink($fotodulu);
+                }
+            } else {
+                // $this->session->set_flashdata('msg', 'Error Upload Foto Profile ' . $temp['noinduk'] . ' ');
+                unset($data['filefoto']);
+            }
+        }
+        unset($data['logo']);
+        unset($data['file_path']);
+        unset($data['old_logo']);
         $data['modul'] = $modul;
         $id = $data['id'];
         unset($data['id']);
@@ -45,4 +79,40 @@ class User_model extends CI_Model
         $this->db->where('id',$id);
         return $this->db->delete('user');
     }
+    public function uploadFoto()
+	{
+		$this->load->library('upload');
+		$this->uploadConfig = array(
+			'upload_path' => LOK_UPLOAD_USER,
+			'allowed_types' => 'gif|jpg|jpeg|png',
+			'max_size' => max_upload() * 1024,
+		);
+		// Adakah berkas yang disertakan?
+		$adaBerkas = $_FILES['file']['name'];
+		if (empty($adaBerkas)) {
+			return 'kosong';
+		}
+		$uploadData = NULL;
+		$this->upload->initialize($this->uploadConfig);
+		if ($this->upload->do_upload('file')) {
+			$uploadData = $this->upload->data();
+			$namaFileUnik = strtolower($uploadData['file_name']);
+			$fileRenamed = rename(
+				$this->uploadConfig['upload_path'] . $uploadData['file_name'],
+				$this->uploadConfig['upload_path'] . $namaFileUnik
+			);
+			$uploadData['file_name'] = $fileRenamed ? $namaFileUnik : $uploadData['file_name'];
+		} else {
+			$_SESSION['success'] = -1;
+			$ext = pathinfo($adaBerkas, PATHINFO_EXTENSION);
+			$ukuran = $_FILES['file']['size'] / 1000000;
+			$tidakupload = $this->upload->display_errors(NULL, NULL);
+            if(str_contains($tidakupload,'filetype')){
+                $tidakupload = "Ekstensi ".$ext." tidak diperbolehkan, upload file gif|jpg|jpeg|png";
+            }
+			// $this->session->set_flashdata('msg', $tidakupload . ' ' . $ext . ' ukuran ' . round($ukuran, 2) . ' MB');
+            $this->session->set_flashdata('msg', $tidakupload);
+		}
+		return (!empty($uploadData)) ? $uploadData['file_name'] : NULL;
+	}
 }

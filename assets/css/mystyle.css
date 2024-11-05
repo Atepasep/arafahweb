@@ -12,3 +12,10 @@
 .hilang {
 	display: none !important;
 }
+div.dataTables_wrapper div.dataTables_filter label {
+	float: left !important;
+}
+/* .table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+	background-color: linen;
+} */
