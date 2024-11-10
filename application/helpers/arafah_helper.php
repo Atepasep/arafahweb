@@ -9,6 +9,14 @@ function datauser($kode, $kolom)
         return $kode[$kolom];
     }
 }
+function datacabang($kode, $kolom)
+{
+    if ($kode != '') {
+        $CI = &get_instance();
+        $kode = $CI->usermodel->getdatacabang($kode)->row_array();
+        return $kode[$kolom];
+    }
+}
 function visibpass($kata)
 {
     $hasil = '•';
@@ -41,7 +49,33 @@ function addnik(){
     }
     $norut = (int) $norut;
     $norut++;
-    return 'ARF.'.sprintf('%02d', date('m')).date('y').sprintf("%04s", $norut);
+    return 'ARM.'.sprintf('%02d', date('m')).date('y').sprintf("%04s", $norut);
+}
+function kodesupplier(){
+    $CI = &get_instance();
+    $kode = $CI->suppliermodel->kodesupplier();
+    if($kode->num_rows()==0){
+        $norut = 0;
+    }else{
+        $ada = $kode->row_array();
+        $norut = $ada['niko'];
+    }
+    $norut = (int) $norut;
+    $norut++;
+    return 'ARM.SUP.'.sprintf("%04s", $norut);
+}
+function kodecustomer(){
+    $CI = &get_instance();
+    $kode = $CI->customermodel->kodecustomer();
+    if($kode->num_rows()==0){
+        $norut = 0;
+    }else{
+        $ada = $kode->row_array();
+        $norut = $ada['niko'];
+    }
+    $norut = (int) $norut;
+    $norut++;
+    return 'ARM.CST.'.sprintf("%04s", $norut);
 }
 function tglmysql($tgl)
 {
@@ -156,4 +190,8 @@ function umurnow($tgl){
     }
 
     return $jadi;
+}
+function toAngka($rp)
+{
+    return str_replace(',', '', $rp);
 }

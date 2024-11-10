@@ -30,11 +30,13 @@ class Userapps extends CI_Controller
     }
     public function adduser(){
         $data['kode'] = time();
+        $data['cabang'] = $this->usermodel->getcabang();
         $data['action'] = base_url().'userapps/simpanuser';
         $this->load->view('user/adduser',$data);
     }
     public function edituser($id){
         $data['data'] = $this->usermodel->getdatabyid($id)->row_array();
+        $data['cabang'] = $this->usermodel->getcabang();
         $data['action'] = base_url().'userapps/updateuser';
         $this->load->view('user/edituser',$data);
     }

@@ -76,6 +76,8 @@
             </div>
         </div>
         <div class="rounded p-2" style="border-style: dotted; border-color: #EBEEF1;border-width: 2px;">
+            <h4 class="m-0">Hak Akses User</h4>
+            <hr class="m-1">
             <div class="row">
                 <div class="col-4">
                     <label class="form-check mb-1">
@@ -160,7 +162,20 @@
                     </label>                
                 </div>
             </div>
-            
+        </div>
+        <div class="rounded p-2 mt-1" style="border-style: dotted; border-color: #EBEEF1;border-width: 2px;">
+            <h4 class="m-0">Cabang</h4>
+            <hr class="m-1">
+            <div class="row">
+                <?php $no=1; foreach($cabang->result_array() as $cab): ?>
+                <div class="col-6">
+                    <label class="form-check mb-1">
+                        <input class="form-check-input font-kecil" type="checkbox" id="<?= $cab['cabang']; ?>" name="cabang<?= $no++; ?>">
+                        <span class="form-check-label font-kecil" name="namacabang<?= $no++; ?>"><?= $cab['cabang'].' - '.$cab['nama_cabang']; ?></span>
+                    </label>   
+                </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </form>
 </div>

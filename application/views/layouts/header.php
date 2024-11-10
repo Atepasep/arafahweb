@@ -25,14 +25,27 @@
 
     <link href="<?= base_url() ?>assets/css/mystyle.css?1692870487" rel="stylesheet"/>
     <style>
-      /* @import url('https://rsms.me/inter/inter.css');
-      :root {
-      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-      }
-      body {
-      	font-feature-settings: "cv03", "cv04", "cv11";
-      } */
+    /* @import url('https://rsms.me/inter/inter.css'); */
+
+    :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+    }
+  </style>
+  <script type="text/javascript">
+    base_url = '<?= base_url() ?>';
+  </script>
+  <noscript>
+    <style type="text/css">
+        .page {display:none;}
     </style>
+    <div class="noscriptmsg">
+      You don't have javascript enabled.  Good luck with that.
+    </div>
+  </noscript>
   </head>
   <!-- Modal -->
   <body class="layout-fluid">
@@ -131,7 +144,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="simpanformscroll">Save changes</button>
+            <button type="button" class="btn btn-primary" id="simpanformscroll">Simpan</button>
           </div>
         </div>
       </div>
@@ -310,13 +323,13 @@
                   <div class="dropdown-menu font-kecil">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item py-1" href="./alerts.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'barang'; ?>">
                           Barang
                         </a>
-                        <a class="dropdown-item py-1" href="./accordion.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'supplier'; ?>">
                           Supplier
                         </a>
-                        <a class="dropdown-item py-1" href="./blank.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'customer'; ?>">
                           Customer
                         </a>
                         <hr class="m-0">
@@ -571,15 +584,7 @@
                 </li>
               </ul>
               <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-                <form action="./" method="get" autocomplete="off" novalidate>
-                  <div class="input-icon">
-                    <span class="input-icon-addon">
-                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-                    </span>
-                    <input type="text" value="" class="form-control" placeholder="Search…" aria-label="Search in website">
-                  </div>
-                </form>
+                <h3 class="mt-2 text-blue">Cabang : <?= $this->session->userdata('cabangaktif') ?></h3>
               </div>
             </div>
           </div>

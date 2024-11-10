@@ -6,10 +6,10 @@ class Personil extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // if ($this->session->userdata('getinarafah') != true) {
-        //     $url = base_url('Auth');
-        //     redirect($url);
-        // }
+        if ($this->session->userdata('getinarafah') != true) {
+            $url = base_url('Auth');
+            redirect($url);
+        }
         $this->load->model('personil_model','personilmodel');
         $this->load->model('user_model','usermodel');
         $this->load->model('pendidikan_model','pendidikanmodel');

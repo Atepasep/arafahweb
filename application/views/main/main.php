@@ -6,6 +6,7 @@
             <div class="empty-img mt-4">
                 <img src="<?= base_url().'assets/images/logoasliw.png'; ?>" height="128" alt="LOGO">
             </div>
+            <p class="empty-title"><?= $this->session->userdata('cabangaktif'); ?> - <?= datacabang($this->session->userdata('cabangaktif'),'alamat_cabang'); ?></p>
             <p class="empty-title">Selamat datang <?= datauser($this->session->userdata('userid'),'nama'); ?></p>
             <p class="empty-subtitle text-secondary">
             <input type="text" class="hilang" name="msg" id="msg" value="<?= $this->session->flashdata('msg'); ?>">

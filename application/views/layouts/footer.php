@@ -35,7 +35,6 @@
     <script src="<?= base_url(); ?>assets/js/demo-theme.min.js?1692870487"></script>
     <script src="<?= base_url(); ?>assets/js/tabler.min.js?1692870487" defer></script>
     <script src="<?= base_url(); ?>assets/js/demo.min.js?1692870487" defer></script>
-    <script src="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.js"></script>
     <!-- dataTablses -->
     <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
@@ -45,8 +44,9 @@
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.fixedColumns.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/fixedColumns.bootstrap4.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
+    
     <script src="<?= base_url(); ?>assets/js/myscript.js?1692870487" defer></script>
+    <script src="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.js"></script>
     <?php if(isset($fungsi) && $fungsi=='main'){ ?>
       <script src="<?= base_url(); ?>assets/js/own/main.js?1692870487" defer></script>
     <?php }; ?>

@@ -1,7 +1,7 @@
 <?php
 class Personil_model extends CI_Model {
     public function getnik(){
-        $this->db->select('substr(nik,9,5) as niko');
+        $this->db->select('max(substr(nik,9,4)) as niko');
         return $this->db->get('personil');
     }
     public function getdata(){

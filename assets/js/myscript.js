@@ -6,8 +6,8 @@ $(document).ready(function () {
 		responsive: true,
 		pageLength: 50,
 		// paging: false,
-		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
 		dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
+		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
 	});
 	$(".fixcolumn").DataTable({
 		fixedColumns: {
@@ -15,10 +15,10 @@ $(document).ready(function () {
 			end: 1
 		},
 		// fixedColumns: true,
-		paging: false,
+		// paging: false,
 		scrollCollapse: true,
 		scrollX: true,
-		scrollY: 300,
+		scrollY: 600,
 		dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
 	});
 	$("#modal-delete").on("show.bs.modal", function (e) {
@@ -122,3 +122,49 @@ function pesan(pesan, jenis) {
 		loader: false,
 	});
 }
+
+function rupiah(amount, decimalSeparator, thousandsSeparator, nDecimalDigits) {
+	if (amount == 0) {
+		return "0";
+	} else {
+		var num = parseFloat(amount); //convert to float
+		//default values
+		decimalSeparator = decimalSeparator || ".";
+		thousandsSeparator = thousandsSeparator || ",";
+		nDecimalDigits = nDecimalDigits == null ? 2 : nDecimalDigits;
+
+		var fixed = num.toFixed(nDecimalDigits); //limit or add decimal digits
+		//separate begin [$1], middle [$2] and decimal digits [$4]
+		var parts = new RegExp(
+			"^(-?\\d{1,3})((?:\\d{3})+)(\\.(\\d{" + nDecimalDigits + "}))?$",
+		).exec(fixed);
+
+		if (parts) {
+			//num >= 1000 || num < = -1000
+			return (
+				parts[1] +
+				parts[2].replace(/\d{3}/g, thousandsSeparator + "$&") +
+				(parts[4] ? decimalSeparator + parts[4] : "")
+			);
+		} else {
+			return fixed.replace(".", decimalSeparator);
+		}
+	}
+}
+
+function toAngka(rp) {
+	if (rp == "" || rp.trim() == "-") {
+		return 0;
+	} else {
+		return rp.replace(/,*|\D/g, "");
+	}
+}
+$(".inputangka").on("change click keyup input paste", function (event) {
+	$(this).val(function (index, value) {
+		return value
+			.replace(/(?!\.)\D/g, "")
+			.replace(/(?<=\..*)\./g, "")
+			.replace(/(?<=\.\d\d).*/g, "")
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	});
+});

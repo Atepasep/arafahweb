@@ -1,8 +1,10 @@
 <?php
-class User_model extends CI_Model
+class Barang_model extends CI_Model
 {
     public function getdata(){
-        return $this->db->get('user');
+        $this->db->join('satuan','satuan.id = barang.satuan_id','left');
+        $this->db->join('kategori','kategori.id = barang.kategori_id','left');
+        return $this->db->get('barang');
     }
     public function getdatabyuser($data){
        return $this->db->get_where('user',['username'=> $data]);
