@@ -18,7 +18,7 @@
                             <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                         </div>
                     <?php endif; ?>
-                    <a href="<?= base_url().'customer/addcustomer'; ?>" class="btn btn-blue btn-square font-kecil btn-ku" data-bs-toggle="modal" data-bs-target="#modal-scrollable" data-title="Add Customer"><i class="fa fa-plus mr-1"></i> Tambah data</a>
+                    <a href="<?= base_url().'barang/addbarang'; ?>" class="btn btn-blue btn-square font-kecil btn-ku" data-bs-toggle="modal" data-bs-target="#modal-large" data-title="Add Barang"><i class="fa fa-plus mr-1"></i> Tambah data</a>
                 </h2>
                 </div>
             </div>
@@ -35,12 +35,12 @@
                                     <thead>
                                         <tr>
                                             <th>Kode</th>
-                                            <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>Kontak</th>
-                                            <th>Telp</th>
-                                            <th>eMail</th>
-                                            <th>Npwp</th>
+                                            <th>Nama Barang</th>
+                                            <th>Kategori</th>
+                                            <th>Satuan</th>
+                                            <th>Stok</th>
+                                            <th>Hg Jual</th>
+                                            <th>Hg Beli</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -51,11 +51,11 @@
                                             <td class="align-middle"><?= $dat['nama']; ?></td>
                                             <td class="align-middle"><?= $dat['nama_kategori']; ?></td>
                                             <td class="align-middle"><?= $dat['nama_satuan']; ?></td>
-                                            <td class="align-middle"><?= $dat['stok']; ?></td>
-                                            <td class="align-middle"><?= $dat['hgjual']; ?></td>
-                                            <td class="align-middle"><?= $dat['hgbeli']; ?></td>
+                                            <td class="align-middle text-right text-blue"><?= rupiah($dat['stok'],0); ?></td>
+                                            <td class="align-middle text-right text-blue"><?= rupiah($dat['hgjual'],2); ?></td>
+                                            <td class="align-middle text-right text-blue"><?= rupiah($dat['hgbeli'],2); ?></td>
                                             <td class="align-middle">
-                                                <a href="<?= base_url().'customer/editcustomer/'.$dat['id']; ?>" class="btn btn-sm btn-blue" data-bs-toggle="modal" data-bs-target="#modal-scrollable" data-title="Edit Personil/Karyawan" title="Edit Data"><i class="fa fa-edit"></i> Edit</a>
+                                                <a href="<?= base_url().'barang/editbarang/'.$dat['id']; ?>" class="btn btn-sm btn-blue" data-bs-toggle="modal" data-bs-target="#modal-scrollable" data-title="Edit Personil/Karyawan" title="Edit Data"><i class="fa fa-edit"></i> Edit</a>
                                                 <a href="#" data-href="<?= base_url().'customer/hapusdata/'.$dat['id']; ?>" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" data-message="Akan menghapus data ini" title="Hapus Data"><i class="fa fa-trash-o"></i> Hapus</a>
                                             </td>
                                         </tr>

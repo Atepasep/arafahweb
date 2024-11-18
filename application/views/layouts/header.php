@@ -6,11 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Arafah Medilab</title>
     <link href="<?= base_url(); ?>assets/favicon.ico" rel="icon">
-    <!-- datatables -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/datatables.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/fixheader/css/fixedHeader.bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/fixedColumns.dataTables.min.css">
     <!-- CSS files -->
     <link href=<?= base_url() . "assets/css/bootstrap.min.css" ?> rel="stylesheet">
     <link href="<?= base_url(); ?>assets/css/tabler.min.css?1692870487" rel="stylesheet"/>
@@ -18,12 +13,17 @@
     <link href="<?= base_url() ?>assets/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url(); ?>assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- datatables -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/fixedColumns.dataTables.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/fixheader/css/fixedHeader.bootstrap.min.css">
     <!-- Template source -->
     <link href="<?= base_url() ?>assets/css/demo.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/font-awesome.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.css" rel="stylesheet">
 
-    <link href="<?= base_url() ?>assets/css/mystyle.css?1692870487" rel="stylesheet"/>
+    <link href="<?= base_url() ?>assets/css/mystyle.css?1692870488" rel="stylesheet"/>
     <style>
     /* @import url('https://rsms.me/inter/inter.css'); */
 
@@ -49,7 +49,7 @@
   </head>
   <!-- Modal -->
   <body class="layout-fluid">
-    <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header bg-blue">

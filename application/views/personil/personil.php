@@ -30,8 +30,8 @@
                 <!-- <div class="col-12"> -->
                     <div class="card">
                         <div class="card-body">
-                            <div id="table-default" class="table-responsive">
-                                <table class="table fixcolumn nowrap table-hover mt-1" style="width: 100% !important">
+                            <div id="table-default">
+                                <table class="table fixcolumn table-hover mt-1 row-border order-column nowrap">
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
@@ -50,7 +50,7 @@
                                     <tbody class="table-tbody font-kecil">
                                         <?php foreach($data->result_array() as $dat): ?>
                                         <tr>
-                                            <td class="nowrap">
+                                            <td>
                                                 <div class="row align-items-center">
                                                     <?php 
                                                         if ($dat['filefoto']==''){

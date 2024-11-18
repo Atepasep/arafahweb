@@ -31,19 +31,19 @@
     <!-- <script src="<?= base_url(); ?>assets/js/vendor/jquery.min.js"></script> -->
     <script src="<?= base_url(); ?>assets/js/jquery-3.7.1.js"></script>
     <!-- template source -->
-    <!-- <script src="<?= base_url(); ?>assets/libs/list.js/dist/list.min.js?1692870487" defer></script> -->
-    <script src="<?= base_url(); ?>assets/js/demo-theme.min.js?1692870487"></script>
-    <script src="<?= base_url(); ?>assets/js/tabler.min.js?1692870487" defer></script>
-    <script src="<?= base_url(); ?>assets/js/demo.min.js?1692870487" defer></script>
     <!-- dataTablses -->
-    <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/datatables/dataTables.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.fixedColumns.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/datatables/js/fixedColumns.dataTables.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.responsive.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/responsive.bootstrap.min.js"></script>
-    <script src="<?= base_url(); ?>assets/vendor/fixheader/js/dataTables.fixedheader.min.js"></script>
-    <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.fixedColumns.min.js"></script>
-    <script src="<?= base_url(); ?>assets/vendor/datatables/js/fixedColumns.bootstrap4.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+        <!-- <script src="<?= base_url(); ?>assets/libs/list.js/dist/list.min.js?1692870487" defer></script> -->
+        <script src="<?= base_url(); ?>assets/js/demo-theme.min.js?1692870487"></script>
+    <script src="<?= base_url(); ?>assets/js/tabler.min.js?1692870487" defer></script>
+    <script src="<?= base_url(); ?>assets/js/demo.min.js?1692870487" defer></script>
     
     <script src="<?= base_url(); ?>assets/js/myscript.js?1692870487" defer></script>
     <script src="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.js"></script>

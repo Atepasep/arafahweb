@@ -1,14 +1,4 @@
 $(document).ready(function () {
-	modalBoxLg();
-	modalFull();
-	modalScroll();
-	$(".datatable").DataTable({
-		responsive: true,
-		pageLength: 50,
-		// paging: false,
-		dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
-		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
-	});
 	$(".fixcolumn").DataTable({
 		fixedColumns: {
 			start: 2,
@@ -19,8 +9,20 @@ $(document).ready(function () {
 		scrollCollapse: true,
 		scrollX: true,
 		scrollY: 600,
-		dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
+		pageLength: 50,
+		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
 	});
+	modalBoxLg();
+	modalFull();
+	modalScroll();
+	$(".datatable").DataTable({
+		responsive: true,
+		pageLength: 50,
+		// paging: false,
+		dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
+		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
+	});
+
 	$("#modal-delete").on("show.bs.modal", function (e) {
 		var string = document.getElementById("modal-delete").innerHTML;
 		var link = $(e.relatedTarget);

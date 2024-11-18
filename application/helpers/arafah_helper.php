@@ -1,6 +1,7 @@
 <?php
 define('LOK_UPLOAD_USER', "./assets/images/user_avatar/");
 define('LOK_UPLOAD_PERSONIL', "./assets/images/personil/");
+define('LOK_UPLOAD_BARANG', "./assets/images/barang/");
 function datauser($kode, $kolom)
 {
     if ($kode != '') {
@@ -76,6 +77,19 @@ function kodecustomer(){
     $norut = (int) $norut;
     $norut++;
     return 'ARM.CST.'.sprintf("%04s", $norut);
+}
+function kodebarang(){
+    $CI = &get_instance();
+    $kode = $CI->barangmodel->kodebarang();
+    if($kode->num_rows()==0){
+        $norut = 0;
+    }else{
+        $ada = $kode->row_array();
+        $norut = $ada['niko'];
+    }
+    $norut = (int) $norut;
+    $norut++;
+    return 'BRG.'.sprintf("%06s", $norut);
 }
 function tglmysql($tgl)
 {

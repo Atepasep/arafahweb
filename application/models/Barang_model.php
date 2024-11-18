@@ -6,24 +6,31 @@ class Barang_model extends CI_Model
         $this->db->join('kategori','kategori.id = barang.kategori_id','left');
         return $this->db->get('barang');
     }
+    public function kodebarang(){
+        $this->db->select("substr(kode,5,6) as niko");
+        $this->db->where('trim(kode) !=','');
+        $this->db->where('SUBSTR(kode,1,3)','BRG');
+        return $this->db->get('barang');
+    }
+    public function getdatakategori(){
+        return $this->db->get('kategori');
+    }
+    public function getdatasatuan(){
+        return $this->db->get('satuan');
+    }
     public function getdatabyuser($data){
        return $this->db->get_where('user',['username'=> $data]);
     }
     public function getdatabyid($id){
         return $this->db->get_where('user',['id'=>$id]);
     }
-    public function simpanuser(){
+    public function simpanbarang(){
         $data = $_POST;
-        $data['username'] = strtoupper($data['username']);
-        $data['aktif'] = isset($data['aktif']) ? 1 : 0;
-        $modul = str_repeat('0',50);
-        for($x=1;$x<=25;$x++){
-            if(isset($data['cek'.$x])){
-                $modul = substr_replace($modul,'10',($x*2)-2,2);
-            }
-            unset($data['cek'.$x]);
-        }
         // $fotodulu = FCPATH . 'assets/images/user_avatar/' . $data['old_logo']; //base_url().$gambar.'.png';
+        $data['cabang'] = $this->session->userdata('cabangaktif');
+        $data['hgbeli'] = toAngka($data['hgbeli']);
+        $data['hgjual'] = toAngka($data['hgjual']);
+        $data['hgretail'] = toAngka($data['hgretail']);
 		$data['filefoto'] = $this->uploadFoto();
 		if ($data['filefoto'] != NULL) {
 			if ($data['filefoto'] == 'kosong') {
@@ -39,8 +46,7 @@ class Barang_model extends CI_Model
 			// $this->session->set_flashdata('msg', 'Error Upload Foto Profile ' . $temp['noinduk'] . ' ');
             unset($data['filefoto']);
 		}
-        $data['modul'] = $modul;
-        return $this->db->insert('user',$data);
+        return $this->db->insert('barang',$data);
     }
     public function updateuser(){
         $data = $_POST;
@@ -94,7 +100,7 @@ class Barang_model extends CI_Model
 	{
 		$this->load->library('upload');
 		$this->uploadConfig = array(
-			'upload_path' => LOK_UPLOAD_USER,
+			'upload_path' => LOK_UPLOAD_BARANG,
 			'allowed_types' => 'gif|jpg|jpeg|png',
 			'max_size' => max_upload() * 1024,
 		);

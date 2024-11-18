@@ -12,10 +12,21 @@
 .hilang {
 	display: none !important;
 }
-div.dataTables_wrapper div.dataTables_filter label {
+/* div.dataTables_wrapper div.dataTables_filter label {
 	float: left !important;
-}
+} */
 /* .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
 	background-color: linen;
 } */
+/* .dataTables_Filter {
+	float: left !important;
+}
+div.dataTables_filter input {
+	width: 1000px;
+} */
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}

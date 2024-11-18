@@ -28,21 +28,22 @@ class Barang extends CI_Controller
         $footer['fungsi'] = 'barang';
         $this->load->view('layouts/footer', $footer);
     }
-    public function addcustomer(){
-        $data['kode'] = kodecustomer();
-        // $data['pendidikan'] = $this->pendidikanmodel->getdata();
-        $data['action'] = base_url().'customer/simpancustomer';
-        $this->load->view('customer/addcustomer',$data);
+    public function addbarang(){
+        $data['kode'] = kodebarang();
+        $data['kategori'] = $this->barangmodel->getdatakategori();
+        $data['satuan'] = $this->barangmodel->getdatasatuan();
+        $data['action'] = base_url().'barang/simpanbarang';
+        $this->load->view('barang/addbarang',$data);
     }
     public function editcustomer($id){
         $data['data'] = $this->customermodel->getdatabyid($id)->row_array();
         $data['action'] = base_url().'customer/updatecustomer';
         $this->load->view('customer/editcustomer',$data);
     }
-    public function simpancustomer(){
-        $hasil = $this->customermodel->simpancustomer();
+    public function simpanbarang(){
+        $hasil = $this->barangmodel->simpanbarang();
         if($hasil){
-            $url = base_url().'customer';
+            $url = base_url().'barang';
             redirect($url);
         }
     }
