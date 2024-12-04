@@ -1,10 +1,75 @@
 <?php
 class Barang_model extends CI_Model
 {
-    public function getdata(){
-        $this->db->join('satuan','satuan.id = barang.satuan_id','left');
-        $this->db->join('kategori','kategori.id = barang.kategori_id','left');
-        return $this->db->get('barang');
+    // public function getdata(){
+    //     $this->db->join('satuan','satuan.id = barang.satuan_id','left');
+    //     $this->db->join('kategori','kategori.id = barang.kategori_id','left');
+    //     return $this->db->get('barang');
+    // }
+    // public function getdata($filter_kategori, $filter_inv, $filter_act)
+    var $column_search = array('barang.nama', 'barang.kode', 'kategori.nama_kategori');
+    public function getdata()
+    {
+        $this->db->select('*', FALSE);
+        $this->db->from('barang');
+        $this->db->join('kategori', 'kategori.id = barang.kategori_id', 'left');
+        $this->db->join('satuan', 'satuan.id = barang.satuan_id', 'left');
+
+        // if ($filter_kategori && $filter_kategori != 'all') {
+        //     $this->db->where('kategori.id', $filter_kategori);
+        // }
+        // if ($filter_inv && $filter_inv != 'all') {
+        //     $isi = $filter_inv == 'x' ? 0 : 1;
+        //     $this->db->where('barang.noinv', $isi);
+        // }
+        // if ($filter_act && $filter_act != 'all') {
+        //     $isi = $filter_act == 'x' ? 0 : 1;
+        //     $this->db->where('barang.act', $isi);
+        // }
+        $i = 0;
+        foreach ($this->column_search as $item) {
+            if ($_POST['search']['value']) {
+                if ($i === 0) {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+                if (count($this->column_search) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        // if (isset($_POST['order'])) {
+        //     $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        // } elseif (isset($this->order)) {
+        //     $order = $this->order;
+        //     $this->db->order_by(key($order), $order[key($order)]);
+        // }
+        $this->db->where('cabang',$this->session->userdata('cabangaktif'));
+        $this->db->order_by('kode','ASC');
+    }
+    // public function get_datatables($filter_kategori, $filter_inv, $filter_act)
+    public function get_datatables()
+    {
+        $this->getdata();
+        if ($_POST['length'] != -1)
+            $this->db->limit($_POST['length'], $_POST['start']);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    // public function count_filtered($filter_kategori, $filter_inv, $filter_act)
+    public function count_filtered()
+    {
+        // $this->getdata($filter_kategori, $filter_inv, $filter_act);
+        $this->getdata();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    public function count_all()
+    {
+        $this->db->from('barang');
+        return $this->db->count_all_results();
     }
     public function kodebarang(){
         $this->db->select("substr(kode,5,6) as niko");

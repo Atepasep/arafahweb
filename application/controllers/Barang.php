@@ -22,9 +22,9 @@ class Barang extends CI_Controller
     public function index()
     {
         $header['posisi'] = 'master';
-        $data['data'] = $this->barangmodel->getdata();
+        // $data['data'] = $this->barangmodel->getdata();
         $this->load->view('layouts/header',$header);
-        $this->load->view('barang/barang',$data);
+        $this->load->view('barang/barang');
         $footer['fungsi'] = 'barang';
         $this->load->view('layouts/footer', $footer);
     }
@@ -60,5 +60,44 @@ class Barang extends CI_Controller
             $url = base_url().'customer';
             redirect($url);
         }
+    }
+    public function get_data_barang(){
+        ob_start(); // buffer output
+        header('Content-Type: application/json');
+
+        // $filter_kategori = $this->input->post('filter_kategori');
+        // $filter_inv = $this->input->post('filter_inv');
+        // $filter_act = $this->input->post('filter_act');
+        // $list = $this->barangmodel->get_datatables($filter_kategori, $filter_inv, $filter_act);
+        $list = $this->barangmodel->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = array();
+            $row[] = $field->kode;
+            $row[] = $field->nama;
+            $row[] = $field->nama_kategori;
+            $row[] = $field->nama_satuan;
+            $row[] = rupiah($field->stok,0);
+            $row[] = rupiah($field->hgbeli,2);
+            $row[] = rupiah($field->hgjual,2);
+            $buton = "<a href=".base_url().'barang/editbarang/'.$field->id." class='btn btn-sm btn-blue mr-1' data-bs-toggle='modal' data-bs-target='#modal-scrollable' data-title='Edit Barang' title='Edit Data'><i class='fa fa-edit'></i> Edit</a>";
+            $buton .= "<a href='#' data-href=".base_url().'customer/hapusdata/'.$field->id." class='btn btn-sm btn-danger' data-bs-toggle='modal' data-bs-target='#modal-delete' data-message='Akan menghapus data ini' title='Hapus Data'><i class='fa fa-trash-o'></i> Hapus</a>";
+            $row[] = $buton;
+
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->barangmodel->count_all(),
+            "recordsFiltered" => $this->barangmodel->count_filtered(),
+            "data" => $data,
+        );
+
+        ob_clean();
+        echo json_encode($output);
+        ob_end_flush();
+        error_log("Finished fetching data");
     }
 }

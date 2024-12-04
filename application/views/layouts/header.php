@@ -15,15 +15,16 @@
     <link href="<?= base_url(); ?>assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- datatables -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/fixedColumns.dataTables.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/fixedColumns.dataTables.css"> -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/fixheader/css/fixedHeader.bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/scroller.dataTables.css"> -->
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/fixheader/css/fixedHeader.bootstrap.min.css"> -->
     <!-- Template source -->
     <link href="<?= base_url() ?>assets/css/demo.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/font-awesome.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.css" rel="stylesheet">
 
-    <link href="<?= base_url() ?>assets/css/mystyle.css?1692870488" rel="stylesheet"/>
+    <link href="<?= base_url() ?>assets/css/mystyle.css?1692870480" rel="stylesheet"/>
     <style>
     /* @import url('https://rsms.me/inter/inter.css'); */
 

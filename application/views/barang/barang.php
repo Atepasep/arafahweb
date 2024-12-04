@@ -28,10 +28,15 @@
         <div class="container-xl">
             <!-- <div class="row row-cards"> -->
                 <!-- <div class="col-12"> -->
+                    <div class="card card-active mb-1">
+                        <div class="card-body">
+                            <p>This is a card with active state.</p>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-body">
-                            <div id="table-default" class="table-responsive">
-                                <table class="table fixcolumn nowrap table-hover mt-1" style="width: 100% !important; height: 30px !important;">
+                            <div id="table-default" class="table-responsive" style="z-index: 1000000;">
+                                <table class="table  nowrap table-hover mt-1" id="tabelnya">
                                     <thead>
                                         <tr>
                                             <th>Kode</th>
@@ -44,22 +49,8 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-tbody font-kecil">
-                                        <?php foreach($data->result_array() as $dat): ?>
-                                        <tr>
-                                            <td class="align-middle"><?= $dat['kode']; ?></td>
-                                            <td class="align-middle"><?= $dat['nama']; ?></td>
-                                            <td class="align-middle"><?= $dat['nama_kategori']; ?></td>
-                                            <td class="align-middle"><?= $dat['nama_satuan']; ?></td>
-                                            <td class="align-middle text-right text-blue"><?= rupiah($dat['stok'],0); ?></td>
-                                            <td class="align-middle text-right text-blue"><?= rupiah($dat['hgjual'],2); ?></td>
-                                            <td class="align-middle text-right text-blue"><?= rupiah($dat['hgbeli'],2); ?></td>
-                                            <td class="align-middle">
-                                                <a href="<?= base_url().'barang/editbarang/'.$dat['id']; ?>" class="btn btn-sm btn-blue" data-bs-toggle="modal" data-bs-target="#modal-scrollable" data-title="Edit Personil/Karyawan" title="Edit Data"><i class="fa fa-edit"></i> Edit</a>
-                                                <a href="#" data-href="<?= base_url().'customer/hapusdata/'.$dat['id']; ?>" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" data-message="Akan menghapus data ini" title="Hapus Data"><i class="fa fa-trash-o"></i> Hapus</a>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach; ?>
+                                    <tbody class="table-tbody">
+                                       
                                     </tbody>
                                 </table>
                             </div>

@@ -38,18 +38,25 @@
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.responsive.min.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/datatables/js/responsive.bootstrap.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/datatables/js/dataTables.scroller.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/datatables/js/scroller.dataTables.js"></script>
     <script src="<?= base_url(); ?>assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
-        <!-- <script src="<?= base_url(); ?>assets/libs/list.js/dist/list.min.js?1692870487" defer></script> -->
-        <script src="<?= base_url(); ?>assets/js/demo-theme.min.js?1692870487"></script>
+    <!-- <script src="<?= base_url(); ?>assets/libs/list.js/dist/list.min.js?1692870487" defer></script> -->
+    <script src="<?= base_url(); ?>assets/js/demo-theme.min.js?1692870487"></script>
     <script src="<?= base_url(); ?>assets/js/tabler.min.js?1692870487" defer></script>
     <script src="<?= base_url(); ?>assets/js/demo.min.js?1692870487" defer></script>
     
+    <?php $timeunik = '1692870481'; ?>
     <script src="<?= base_url(); ?>assets/js/myscript.js?1692870487" defer></script>
     <script src="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.js"></script>
     <?php if(isset($fungsi) && $fungsi=='main'){ ?>
-      <script src="<?= base_url(); ?>assets/js/own/main.js?1692870487" defer></script>
+      <script src="<?= base_url(); ?>assets/js/own/main.js?<?= $timeunik ?>" defer></script>
     <?php }; ?>
+    <?php if(isset($fungsi) && $fungsi=='barang'){ ?>
+      <script src="<?= base_url(); ?>assets/js/own/barang.js?<?= $timeunik ?>" defer></script>
+    <?php }; ?>
+
     <!-- <script>
       document.addEventListener("DOMContentLoaded", function() {
       const list = new List('table-default', {

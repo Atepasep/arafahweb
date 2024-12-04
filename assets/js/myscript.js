@@ -5,11 +5,12 @@ $(document).ready(function () {
 			end: 1
 		},
 		// fixedColumns: true,
-		// paging: false,
+		paging: false,
 		scrollCollapse: true,
 		scrollX: true,
 		scrollY: 600,
-		pageLength: 50,
+		searching: false,
+		// pageLength: 50,
 		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
 	});
 	modalBoxLg();
@@ -19,7 +20,9 @@ $(document).ready(function () {
 		responsive: true,
 		pageLength: 50,
 		// paging: false,
-		dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
+		info: true,
+		scrollY: 500,
+		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
 		// dom: '<"pull-left"l><"pull-right"f>t<"bottom-left"i><"bottom-right"p>',
 	});
 
