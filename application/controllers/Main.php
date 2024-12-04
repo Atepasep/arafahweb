@@ -12,6 +12,10 @@ class Main extends CI_Controller
         }
         // $this->load->model('personilmodel');
         $this->load->model('user_model','usermodel');
+        if ($this->session->userdata('cabangaktif') == '') {
+            $url = base_url('pilihcabang');
+            redirect($url);
+        }
     }
     public function index()
     {

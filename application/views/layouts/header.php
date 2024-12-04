@@ -12,21 +12,45 @@
     <link href="<?= base_url() ?>assets/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
+    <link href="<?= base_url(); ?>assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- datatables -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/dataTables.dataTables.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/fixedColumns.dataTables.css"> -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/responsive.bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/css/scroller.dataTables.css"> -->
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/fixheader/css/fixedHeader.bootstrap.min.css"> -->
+    <!-- Template source -->
     <link href="<?= base_url() ?>assets/css/demo.min.css?1692870487" rel="stylesheet"/>
     <link href="<?= base_url() ?>assets/css/font-awesome.min.css?1692870487" rel="stylesheet"/>
-    <link href="<?= base_url() ?>assets/css/mystyle.css?1692870487" rel="stylesheet"/>
+    <link href="<?= base_url(); ?>assets/vendor/toast/jquery.toast.min.css" rel="stylesheet">
+
+    <link href="<?= base_url() ?>assets/css/mystyle.css?1692870480" rel="stylesheet"/>
     <style>
-      /* @import url('https://rsms.me/inter/inter.css');
-      :root {
-      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-      }
-      body {
-      	font-feature-settings: "cv03", "cv04", "cv11";
-      } */
+    /* @import url('https://rsms.me/inter/inter.css'); */
+
+    :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+    }
+  </style>
+  <script type="text/javascript">
+    base_url = '<?= base_url() ?>';
+  </script>
+  <noscript>
+    <style type="text/css">
+        .page {display:none;}
     </style>
+    <div class="noscriptmsg">
+      You don't have javascript enabled.  Good luck with that.
+    </div>
+  </noscript>
   </head>
+  <!-- Modal -->
   <body class="layout-fluid">
-    <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header bg-blue">
@@ -34,7 +58,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body fetched-data">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.
+            <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde. -->
+            <div class="container container-slim py-4">
+              <div class="text-center">
+                <div class="text-secondary mb-3">Fetching data, Please Wait ..</div>
+                <div class="progress progress-sm">
+                  <div class="progress-bar progress-bar-indeterminate"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- <div class="modal-footer">
             <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -43,6 +75,82 @@
         </div>
       </div>
     </div>
+    <div class="modal modal-blur fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-status bg-danger"></div>
+          <div class="modal-body text-center py-4">
+            <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>
+            <h3>Anda yakin?</h3>
+            <div class="text-secondary message">Do you really want to remove 84 files? What you've done cannot be undone.</div>
+          </div>
+          <div class="modal-footer">
+            <div class="w-100">
+              <div class="row">
+                <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                    Batal
+                  </a></div>
+                <div class="col"><a href="#" class="btn btn-danger w-100 btn-ok">
+                    Hapus
+                  </a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-full-width modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-blue">
+            <h5 class="modal-title text-white">Full width modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body fetched-data">
+            <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde. -->
+            <div class="container container-slim py-4" style="width: 50%">
+              <div class="text-center">
+                <div class="text-secondary mb-3">Fetching data, Please wait ..</div>
+                <div class="progress progress-sm">
+                  <div class="progress-bar progress-bar-indeterminate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-scrollable" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-blue">
+            <h5 class="modal-title text-white">Scrollable modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body fetched-data">
+            <div class="container container-slim py-4">
+              <div class="text-center">
+                <div class="text-secondary mb-3">Fetching data, Please wait ..</div>
+                <div class="progress progress-sm">
+                  <div class="progress-bar progress-bar-indeterminate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="simpanformscroll">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal  -->
     <div class="page">
       <!-- Navbar -->
       <header class="navbar navbar-expand-md d-print-none" >
@@ -154,10 +262,18 @@
             </div>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                <?php 
+                  $foto = base_url().'assets/images/logoasliw.png';
+                  if(datauser($this->session->userdata('userid'),'filefoto')!=''){
+                    if(file_exists(FCPATH .'assets/images/user_avatar/'.datauser($this->session->userdata('userid'),'filefoto'))){
+                      $foto = base_url().'assets/images/user_avatar/'.datauser($this->session->userdata('userid'),'filefoto');
+                    }
+                  }
+                ?>
+                <span class="avatar avatar-sm" style="background-image: url(<?= $foto; ?>)"></span>
                 <div class="d-none d-xl-block ps-2">
-                  <div>Administrator</div>
-                  <div class="mt-1 small text-secondary">Programmer</div>
+                  <div><?= datauser($this->session->userdata('userid'),'nama'); ?></div>
+                  <div class="mt-1 small text-secondary"><?= datauser($this->session->userdata('userid'),'posisi'); ?></div>
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -208,17 +324,17 @@
                   <div class="dropdown-menu font-kecil">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item py-1" href="./alerts.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'barang'; ?>">
                           Barang
                         </a>
-                        <a class="dropdown-item py-1" href="./accordion.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'supplier'; ?>">
                           Supplier
                         </a>
-                        <a class="dropdown-item py-1" href="./blank.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'customer'; ?>">
                           Customer
                         </a>
                         <hr class="m-0">
-                        <a class="dropdown-item py-1" href="./badges.html">
+                        <a class="dropdown-item py-1" href="<?= base_url().'personil'; ?>">
                           Karyawan/Personil
                         </a>
                         <a class="dropdown-item py-1" href="<?= base_url().'userapps'; ?>">
@@ -469,15 +585,7 @@
                 </li>
               </ul>
               <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-                <form action="./" method="get" autocomplete="off" novalidate>
-                  <div class="input-icon">
-                    <span class="input-icon-addon">
-                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-                    </span>
-                    <input type="text" value="" class="form-control" placeholder="Search…" aria-label="Search in website">
-                  </div>
-                </form>
+                <h3 class="mt-2 text-blue">Cabang : <?= $this->session->userdata('cabangaktif') ?></h3>
               </div>
             </div>
           </div>
