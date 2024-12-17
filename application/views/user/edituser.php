@@ -173,10 +173,17 @@
             <h4 class="m-0">Cabang</h4>
             <hr class="m-1">
             <div class="row">
-                <?php $no=1; foreach($cabang->result_array() as $cab): $nox = $no++; ?>
+                <?php 
+                    $datacabang = $data['cabang'];
+                    $cabangdata = [];
+                    for($x=0;$x<=(strlen($datacabang)/3)-1;$x++){
+                        array_push($cabangdata,substr($datacabang,($x*3),3));
+                    }
+                ?>
+                <?php $no=1; foreach($cabang->result_array() as $cab): $nox = $no++; $ceked = in_array($cab['cabang'],$cabangdata) ? 'checked' : ''; ?>
                 <div class="col-6">
                     <label class="form-check mb-1">
-                        <input class="form-check-input font-kecil" type="checkbox" id="<?= $cab['cabang']; ?>" name="cabang<?= $nox; ?>">
+                        <input class="form-check-input font-kecil" type="checkbox" id="<?= $cab['cabang']; ?>" name="cabang<?= $nox; ?>" <?= $ceked; ?>>
                         <span class="form-check-label font-kecil"><?= $cab['cabang'].' - '.$cab['nama_cabang']; ?></span>
                         <input type="text" class="hilang" name="namacabang<?= $nox; ?>" id="namacabang<?= $nox; ?>" value="<?= $cab['cabang'] ?>">
                     </label>   

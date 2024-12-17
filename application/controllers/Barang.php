@@ -35,10 +35,12 @@ class Barang extends CI_Controller
         $data['action'] = base_url().'barang/simpanbarang';
         $this->load->view('barang/addbarang',$data);
     }
-    public function editcustomer($id){
-        $data['data'] = $this->customermodel->getdatabyid($id)->row_array();
-        $data['action'] = base_url().'customer/updatecustomer';
-        $this->load->view('customer/editcustomer',$data);
+    public function editbarang($id){
+        $data['data'] = $this->barangmodel->getdatabyid($id)->row_array();
+        $data['kategori'] = $this->barangmodel->getdatakategori();
+        $data['satuan'] = $this->barangmodel->getdatasatuan();
+        $data['action'] = base_url().'barang/updatebarang';
+        $this->load->view('barang/editbarang',$data);
     }
     public function simpanbarang(){
         $hasil = $this->barangmodel->simpanbarang();
@@ -48,16 +50,16 @@ class Barang extends CI_Controller
         }
     }
     public function hapusdata($id){
-        $hasil = $this->customermodel->hapusdata($id);
+        $hasil = $this->barangmodel->hapusdata($id);
         if($hasil){
-            $url = base_url().'customer';
+            $url = base_url().'barang';
             redirect($url);
         }
     }
-    public function updatecustomer(){
-        $hasil = $this->customermodel->updatecustomer();
+    public function updatebarang(){
+        $hasil = $this->barangmodel->updatebarang();
         if($hasil){
-            $url = base_url().'customer';
+            $url = base_url().'barang';
             redirect($url);
         }
     }
@@ -82,8 +84,8 @@ class Barang extends CI_Controller
             $row[] = rupiah($field->stok,0);
             $row[] = rupiah($field->hgbeli,2);
             $row[] = rupiah($field->hgjual,2);
-            $buton = "<a href=".base_url().'barang/editbarang/'.$field->id." class='btn btn-sm btn-blue mr-1' data-bs-toggle='modal' data-bs-target='#modal-scrollable' data-title='Edit Barang' title='Edit Data'><i class='fa fa-edit'></i> Edit</a>";
-            $buton .= "<a href='#' data-href=".base_url().'customer/hapusdata/'.$field->id." class='btn btn-sm btn-danger' data-bs-toggle='modal' data-bs-target='#modal-delete' data-message='Akan menghapus data ini' title='Hapus Data'><i class='fa fa-trash-o'></i> Hapus</a>";
+            $buton = "<a href=".base_url().'barang/editbarang/'.$field->idbarang." class='btn btn-sm btn-blue mr-1' data-bs-toggle='modal' data-bs-target='#modal-large' data-title='Edit Barang' title='Edit Data'><i class='fa fa-edit'></i> Edit</a>";
+            $buton .= "<a href='#' data-href=".base_url().'barang/hapusdata/'.$field->idbarang." class='btn btn-sm btn-danger' data-bs-toggle='modal' data-bs-target='#modal-delete' data-message='Akan menghapus data ini' title='Hapus Data'><i class='fa fa-trash-o'></i> Hapus</a>";
             $row[] = $buton;
 
             $data[] = $row;

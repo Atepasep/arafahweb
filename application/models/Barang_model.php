@@ -10,7 +10,7 @@ class Barang_model extends CI_Model
     var $column_search = array('barang.nama', 'barang.kode', 'kategori.nama_kategori');
     public function getdata()
     {
-        $this->db->select('*', FALSE);
+        $this->db->select('*,barang.id as idbarang,kategori.id as kategori_id,satuan.id as satuan_id', FALSE);
         $this->db->from('barang');
         $this->db->join('kategori', 'kategori.id = barang.kategori_id', 'left');
         $this->db->join('satuan', 'satuan.id = barang.satuan_id', 'left');
@@ -87,7 +87,7 @@ class Barang_model extends CI_Model
        return $this->db->get_where('user',['username'=> $data]);
     }
     public function getdatabyid($id){
-        return $this->db->get_where('user',['id'=>$id]);
+        return $this->db->get_where('barang',['id'=>$id]);
     }
     public function simpanbarang(){
         $data = $_POST;
@@ -113,31 +113,19 @@ class Barang_model extends CI_Model
 		}
         return $this->db->insert('barang',$data);
     }
-    public function updateuser(){
+    public function updatebarang(){
         $data = $_POST;
-        $data['username'] = strtoupper($data['username']);
-        $data['aktif'] = isset($data['aktif']) ? 1 : 0;
-        $modul = str_repeat('0',50);
-        $cabang = '';
-        for($x=1;$x<=25;$x++){
-            if(isset($data['cek'.$x])){
-                $modul = substr_replace($modul,'10',($x*2)-2,2);
-            }
-            unset($data['cek'.$x]);
-        }
-        for($y=1;$y<=20;$y++){
-            if(isset($data['cabang'.$y])){
-                $cabang .= $data['namacabang'.$y];
-            }
-            unset($data['cabang'.$y]);
-            unset($data['namacabang'.$y]);
-        }
+        $data['hgbeli'] = toAngka($data['hgbeli']);
+        $data['hgjual'] = toAngka($data['hgjual']);
+        $data['hgretail'] = toAngka($data['hgretail']);
+        $data['stok'] = toAngka($data['stok']);
+        $data['stokaman'] = toAngka($data['stokaman']);
         if($data['file_path']!=''){
-            $fotodulu = FCPATH . 'assets/images/user_avatar/' . $data['old_logo']; //base_url().$gambar.'.png';
+            $fotodulu = FCPATH . 'assets/images/barang/' . $data['old_logo']; //base_url().$gambar.'.png';
             $data['filefoto'] = $this->uploadFoto();
             if ($data['filefoto'] != NULL) {
                 if ($data['filefoto'] == 'kosong') {
-                    $data['filefoto'] = '';
+                    $data['filefoto'] = NULL;
                 }
                 if (file_exists($fotodulu)) {
                     unlink($fotodulu);
@@ -150,16 +138,14 @@ class Barang_model extends CI_Model
         unset($data['logo']);
         unset($data['file_path']);
         unset($data['old_logo']);
-        $data['modul'] = $modul;
-        $data['cabang'] = $cabang;
         $id = $data['id'];
         unset($data['id']);
         $this->db->where('id',$id);
-        return $this->db->update('user',$data);
+        return $this->db->update('barang',$data);
     }
     public function hapusdata($id){
         $this->db->where('id',$id);
-        return $this->db->delete('user');
+        return $this->db->delete('barang');
     }
     public function uploadFoto()
 	{

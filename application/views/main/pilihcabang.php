@@ -44,6 +44,8 @@
                     <?php 
                         $datacabang = $cabang['cabang'];
                         for($x=0;$x<=(strlen($datacabang)/3)-1;$x++):
+                        $datawarna = ['text-danger','text-info',''];
+                        $kebagian = rand(0,2);
                         switch (substr($datacabang,($x*3),3)) {
                             case 'PST':
                                 $isi = 'GUDANG';
@@ -65,7 +67,7 @@
                     <label class="form-selectgroup-item">
                         <input type="radio" name="icons" value="<?= substr($datacabang,($x*3),3); ?>" class="form-selectgroup-input">
                         <span class="form-selectgroup-label font-bold"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 <?= $datawarna[$kebagian]; ?>" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
                             <?= substr($datacabang,($x*3),3); ?> - <?= $isi; ?></span>
                     </label>
                     <?php endfor; ?>
